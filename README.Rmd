@@ -1,0 +1,103 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# VickyA4
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+**VickyA4** is a small R package that turns my Assignment 1–3 deliverables (PDFs and blog) into a **reproducible, structured corpus** for teaching and exploration.  
+It ships with:
+
+- A **tidy document-level dataset** `course_dataset` built from the PDFs under `inst/extdata/` (no external downloads).
+- A **Shiny app** (under `inst/app/`) to interactively explore word counts, pages, estimated reading time, etc.
+- A **pkgdown site** with function documentation and a getting-started vignette.
+
+> Why a package for PDFs? Because reproducibility beats screenshots. The `data-raw/` pipeline converts static PDFs into a consistent, analysis-ready table that can be versioned, documented, and reused across assignments.
+
+## Installation
+
+You can install the development version of **VickyA4** from GitHub with:
+
+
+```{r, eval = FALSE}
+# install.packages("pak")
+pak::pak("ETC5523-2025/assignment-4-packages-and-shiny-apps-Vicky-FengZ")
+```
+
+
+If you prefer `remotes`:
+
+```{r, eval = FALSE}
+# install.packages("remotes")
+remotes::install_github("ETC5523-2025/assignment-4-packages-and-shiny-apps-Vicky-FengZ")
+```
+
+
+## Example
+
+Load the package and inspect the bundled dataset:
+
+```{r example}
+library(VickyA4)
+
+# A quick peek at the document-level corpus
+head(corpus_docs)
+```
+
+Launch the Shiny app (this opens an interactive window; disabled while knitting the README):
+
+```{r, eval = FALSE}
+launch_app()
+```
+
+### What is inside `course_dataset`?
+
+Each row is one PDF (one assignment). Columns include:
+
+- `source`
+- `n_paragraphs`, `n_words`, `n_chars`
+
+You can compute simple summaries directly:
+
+```{r}
+summary(corpus_docs[c("n_paragraphs", "n_words", "n_chars")])
+```
+
+## Data provenance & reproducibility
+
+- Source PDFs live **inside the package** under `inst/extdata/`.
+- The dataset is built by **`data-raw/course_dataset.R`** using `pdftools`.  
+  Rebuild locally with:
+
+```{r}
+# From the package root (development environment)
+source("data-raw/build_corpus.R")
+```
+
+This design avoids brittle links and ensures anyone can reproduce the exact same dataset from the same PDFs.
+
+## pkgdown
+
+A pkgdown site will host function docs, the vignette, and examples.
+
+- **Planned URL:** <https://YOUR-USERNAME.github.io/VickyA4/>
+- After the first deployment, please update this README to link the live site.
+
+## Limitations (and how to think critically)
+
+- Text extracted from PDFs is not perfect: hyphenation, footers, or equations may affect counts.
+- Sentence counts are approximate (punctuation-based). Treat `read_minutes_est` as a **guide**, not ground truth.
+- If you need deeper NLP (topic modeling, readability indices), extend the `data-raw/` script and document the new fields.

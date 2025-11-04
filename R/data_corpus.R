@@ -1,0 +1,25 @@
+#' Paragraph-level corpus derived from Assignments 1–3
+#'
+#' Text paragraphs parsed from the PDF sources included in \code{inst/extdata}.
+#' Each row is a paragraph with basic text features for interactive exploration.
+#'
+#' @format A tibble with columns:
+#' \describe{
+#'   \item{doc_id}{Unique paragraph id (source + para index).}
+#'   \item{source}{Document identifier, e.g., "A1_breaking_articles", "A2_summarising_tech", "A3_blog".}
+#'   \item{page}{Page number for PDFs (if available), NA for HTML.}
+#'   \item{para_id}{Paragraph index within each source.}
+#'   \item{paragraph}{Raw text of the paragraph.}
+#'   \item{n_chars}{Character count.}
+#'   \item{n_words}{Word count (tokenised by word boundary).}
+#' }
+#' @source Built in \code{data-raw/build_corpus.R} from files in \code{inst/extdata}.
+"corpus_paragraphs"
+
+#' Document-level summary of the corpus
+#'
+#' One row per source document with counts of paragraphs, words and characters.
+#'
+#' @format A tibble with columns: \code{source}, \code{n_paragraphs}, \code{n_words}, \code{n_chars}.
+#' @source Built in \code{data-raw/build_corpus.R}.
+"corpus_docs"

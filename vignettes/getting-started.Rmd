@@ -1,0 +1,94 @@
+---
+title: "getting-started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{getting-started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(VickyA4)
+```
+
+## Overview
+
+This vignette shows how **VickyA4** transforms three assignment PDFs into a **reproducible corpus** and how to explore it:
+
+1. PDFs are bundled under `inst/extdata/`.
+2. `data-raw/course_dataset.R` extracts text and metadata (pages, words, sentences).
+3. The result is stored as `course_dataset` (a tibble shipped with the package).
+4. `launch_app()` opens a Shiny UI that helps users **reach similar conclusions** to the original analyses by interactively exploring the corpus (e.g., document length, estimated reading time, quick comparisons).
+
+The goal is **traceability**: anyone can rebuild the same dataset from the same PDFs, and see how the interactive interface guides interpretation.
+
+## The dataset
+
+```{r}
+# Print the full dataset
+corpus_docs
+```
+
+**Columns (summary):**
+
+- `source`: heuristic label (`"A1"`, `"A2"`, `"A3"`) and a human-readable label derived from the file name.
+- `n_paragraphs`: paragraphs count from `pdftools::pdf_info()`.
+- `n_words`: rough word count based on whitespace tokenization.
+- `n_chars`: approximate chars count via punctuation.
+
+> Interpretation reminder: sentence detection is heuristic; treat `read_minutes_est` as indicative, not definitive.
+
+## Quick exploration in R
+
+You can answer simple questions without leaving R.
+
+**Which assignment is the longest by word count?**
+
+```{r}
+corpus_docs[order(corpus_docs$n_words, decreasing = TRUE), 
+               c("source","n_paragraphs", "n_words")]
+```
+
+**paragraphs vs words:**
+
+```{r}
+with(corpus_docs, data.frame(n_paragraphs, n_words))
+```
+
+## Launch the Shiny app
+
+The app is bundled under `inst/app/` and **reads `course_dataset` directly** (no `read.csv()`):
+
+```{r, eval = FALSE}
+launch_app()
+```
+
+Inside the app you can:
+
+- Select a document and read a concise summary (pages, words, est. reading time).
+- Toggle details like file path.
+- Use the interface descriptions to understand what each field means and how to interpret the outputs.
+
+This lightweight interactivity helps a user **replicate key takeaways** from the original assignments:
+- Identify which deliverable is more substantial (length/complexity proxy).
+- Benchmark reading effort for different pieces.
+- Provide a consistent, transparent basis for comparison.
+
+## Rebuilding the dataset (reproducibility)
+
+To recreate `course_dataset` from the packaged PDFs:
+
+```{r, eval = FALSE}
+# From the package root (development setting)
+source("data-raw/corpus_docs.R")
+```
+
+This will regenerate `data/course_dataset.rda`.  
+If you add new PDFs to `inst/extdata/`, simply rerun the script; the corpus will update automatically.
