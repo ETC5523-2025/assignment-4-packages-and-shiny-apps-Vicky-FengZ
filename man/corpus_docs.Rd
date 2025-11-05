@@ -3,17 +3,28 @@
 \docType{data}
 \name{corpus_docs}
 \alias{corpus_docs}
-\title{Document-level summary of the corpus}
+\title{Document-level corpus}
 \format{
-A tibble with columns: \code{source}, \code{n_paragraphs}, \code{n_words}, \code{n_chars}.
+A tibble/data frame with the following columns:
+\describe{
+\item{source}{Character. Heuristic document label (e.g., "A1", "A2", "A3")
+combined with a human-readable name derived from the filename.}
+\item{n_paragraphs}{Integer. Paragraph count produced by your data pipeline.}
+\item{n_words}{Integer. Rough word count based on whitespace tokenization.}
+\item{n_chars}{Integer. Approximate character count (coarse text size).}
+}
 }
 \source{
-Built in \code{data-raw/build_corpus.R}.
+Student-authored assignment PDFs.
 }
 \usage{
 corpus_docs
 }
 \description{
-One row per source document with counts of paragraphs, words and characters.
+A tidy dataset built from assignment PDFs. Each row is one document.
+}
+\details{
+The dataset is created in \code{data-raw/} from PDFs stored in \code{inst/extdata/}.
+It is designed to be consumed directly by the Shiny app without reading external files.
 }
 \keyword{datasets}

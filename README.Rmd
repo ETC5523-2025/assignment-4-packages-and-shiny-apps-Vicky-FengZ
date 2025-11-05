@@ -50,7 +50,7 @@ remotes::install_github("ETC5523-2025/assignment-4-packages-and-shiny-apps-Vicky
 
 Load the package and inspect the bundled dataset:
 
-```{r example}
+```{r, eval = FALSE}
 library(VickyA4)
 
 # A quick peek at the document-level corpus
@@ -72,7 +72,7 @@ Each row is one PDF (one assignment). Columns include:
 
 You can compute simple summaries directly:
 
-```{r}
+```{r, eval = FALSE}
 summary(corpus_docs[c("n_paragraphs", "n_words", "n_chars")])
 ```
 
@@ -82,7 +82,7 @@ summary(corpus_docs[c("n_paragraphs", "n_words", "n_chars")])
 - The dataset is built by **`data-raw/build_corpus.R`** using `pdftools`.  
   Rebuild locally with:
 
-```{r}
+```{r, eval = FALSE}
 # From the package root (development environment)
 source("data-raw/build_corpus.R")
 ```
@@ -93,7 +93,7 @@ This design avoids brittle links and ensures anyone can reproduce the exact same
 
 A pkgdown site will host function docs, the vignette, and examples.
 
-- **Planned URL:** <https://YOUR-USERNAME.github.io/VickyA4/>
+- **Planned URL:** <https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-Vicky-FengZ/>
 - After the first deployment, please update this README to link the live site.
 
 ## Limitations (and how to think critically)

@@ -1,25 +1,18 @@
-#' Paragraph-level corpus derived from Assignments 1–3
+#' Document-level corpus
 #'
-#' Text paragraphs parsed from the PDF sources included in \code{inst/extdata}.
-#' Each row is a paragraph with basic text features for interactive exploration.
+#' A tidy dataset built from assignment PDFs. Each row is one document.
 #'
-#' @format A tibble with columns:
+#' @format A tibble/data frame with the following columns:
 #' \describe{
-#'   \item{doc_id}{Unique paragraph id (source + para index).}
-#'   \item{source}{Document identifier, e.g., "A1_breaking_articles", "A2_summarising_tech", "A3_blog".}
-#'   \item{page}{Page number for PDFs (if available), NA for HTML.}
-#'   \item{para_id}{Paragraph index within each source.}
-#'   \item{paragraph}{Raw text of the paragraph.}
-#'   \item{n_chars}{Character count.}
-#'   \item{n_words}{Word count (tokenised by word boundary).}
+#'   \item{source}{Character. Heuristic document label (e.g., "A1", "A2", "A3")
+#'                 combined with a human-readable name derived from the filename.}
+#'   \item{n_paragraphs}{Integer. Paragraph count produced by your data pipeline.}
+#'   \item{n_words}{Integer. Rough word count based on whitespace tokenization.}
+#'   \item{n_chars}{Integer. Approximate character count (coarse text size).}
 #' }
-#' @source Built in \code{data-raw/build_corpus.R} from files in \code{inst/extdata}.
-"corpus_paragraphs"
-
-#' Document-level summary of the corpus
+#' @details
+#' The dataset is created in \code{data-raw/} from PDFs stored in \code{inst/extdata/}.
+#' It is designed to be consumed directly by the Shiny app without reading external files.
 #'
-#' One row per source document with counts of paragraphs, words and characters.
-#'
-#' @format A tibble with columns: \code{source}, \code{n_paragraphs}, \code{n_words}, \code{n_chars}.
-#' @source Built in \code{data-raw/build_corpus.R}.
+#' @source Student-authored assignment PDFs.
 "corpus_docs"

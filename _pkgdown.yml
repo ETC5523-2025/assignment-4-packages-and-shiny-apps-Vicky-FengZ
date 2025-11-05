@@ -1,4 +1,29 @@
 url: https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-Vicky-FengZ/
 template:
   bootstrap: 5
+  bootswatch: flatly
+
+home:
+  title: "VickyA4: PDF corpus + Shiny"
+  description: "Reproducible corpus from assignment PDFs with an interactive explorer."
+
+navbar:
+  structure:
+    left:  [home, reference, articles, news]
+    right: [github]
+  components:
+    github:
+      icon: fab fa-github
+      href: https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-Vicky-FengZ
+
+reference:
+  - title: "Core"
+    contents:
+      - launch_app
+      - corpus_docs
+
+articles:
+  - title: "Getting started"
+    contents:
+      - getting-started
 

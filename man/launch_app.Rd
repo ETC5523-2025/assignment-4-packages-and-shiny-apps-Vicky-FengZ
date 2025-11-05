@@ -7,8 +7,18 @@
 launch_app()
 }
 \value{
-No return value; launches the Shiny app.
+No return value; called for side effects.
 }
 \description{
-Launch the Shiny app
+Opens the interactive explorer for the bundled corpus.
+}
+\details{
+This function launches the Shiny app located under \code{inst/app/}.
+The app reads the packaged dataset (e.g., \code{corpus_docs}) and does
+not read external files.
+}
+\examples{
+\dontrun{
+  launch_app()
+}
 }
