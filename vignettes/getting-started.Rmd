@@ -41,7 +41,7 @@ corpus_docs
 - `source`: heuristic label (`"A1"`, `"A2"`, `"A3"`) and a human-readable label derived from the file name.
 - `n_paragraphs`: paragraphs count from `pdftools::pdf_info()`.
 - `n_words`: rough word count based on whitespace tokenization.
-- `n_chars`: approximate chars count via punctuation.
+- `n_chars`: approximate character count via punctuation.
 
 > Interpretation reminder: sentence detection is heuristic; treat `read_minutes_est` as indicative, not definitive.
 
@@ -72,7 +72,7 @@ launch_app()
 
 Inside the app you can:
 
-- Select a document and read a concise summary (pages, words, est. reading time).
+- Select a document and read a concise summary (paragraphs, words, character).
 - Toggle details like file path.
 - Use the interface descriptions to understand what each field means and how to interpret the outputs.
 

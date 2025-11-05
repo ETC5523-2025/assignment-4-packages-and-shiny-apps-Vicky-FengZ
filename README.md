@@ -62,7 +62,7 @@ knitting the README):
 launch_app()
 ```
 
-### What is inside `course_dataset`?
+### What is inside `corpus_docs`?
 
 Each row is one PDF (one assignment). Columns include:
 
@@ -85,7 +85,7 @@ summary(corpus_docs[c("n_paragraphs", "n_words", "n_chars")])
 ## Data provenance & reproducibility
 
 - Source PDFs live **inside the package** under `inst/extdata/`.
-- The dataset is built by **`data-raw/course_dataset.R`** using
+- The dataset is built by **`data-raw/build_corpus.R`** using
   `pdftools`.  
   Rebuild locally with:
 
